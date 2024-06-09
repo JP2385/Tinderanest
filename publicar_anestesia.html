@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Anestesia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .form-group .checkbox-label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .age-group {
+            display: flex;
+            align-items: center;
+        }
+        .age-group input[type="number"] {
+            flex: 1;
+        }
+        .age-group select {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        #map {
+            height: 200px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+        }
+
+        function showMap() {
+            var institution = document.getElementById('institution').value;
+            if (institution) {
+                document.getElementById('map').style.display = 'block';
+            } else {
+                document.getElementById('map').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Publicar Anestesia</h2>
+        <form>
+            <div class="form-group">
+                <label for="fecha">Fecha de la anestesia</label>
+                <input type="date" id="fecha" name="fecha" required>
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora de la anestesia</label>
+                <input type="time" id="hora" name="hora" required>
+            </div>
+            <div class="form-group">
+                <label for="institution">Lugar de la anestesia</label>
+                <select id="institution" name="institution" onchange="showMap()" required>
+                    <option value="">Seleccione una institución</option>
+                    <option value="hospital1">Hospital 1</option>
+                    <option value="hospital2">Hospital 2</option>
+                </select>
+                <div id="map"></div>
+            </div>
+            <div class="form-group">
+                <label for="practica">Práctica a realizar</label>
+                <select id="practica" name="practica" required>
+                    <option value="">Seleccione una práctica</option>
+                    <option value="cirugia1">Cirugía 1</option>
+                    <option value="cirugia2">Cirugía 2</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad del paciente</label>
+                <div class="age-group">
+                    <input type="number" id="edad" name="edad" required>
+                    <select id="unidad" name="unidad" required>
+                        <option value="días">Días</option>
+                        <option value="meses">Meses</option>
+                        <option value="años">Años</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Conocimientos específicos requeridos</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="pediatria" name="conocimientos" value="pediatria">
+                        <label for="pediatria">Pediatría</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="anestesia-regional" name="conocimientos" value="anestesia-regional">
+                        <label for="anestesia-regional">Anestesia Regional</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="cirugia-cardiaca" name="conocimientos" value="cirugia-cardiaca">
+                        <label for="cirugia-cardiaca">Cirugía Cardíaca</label>
+                    </div>
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="transplante" name="conocimientos" value="transplante">
+                        <label for="transplante">Transplante</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group btn-group">
+                <button type="submit">Publicar</button>
+                <button type="button" onclick="window.location.href='ceder_anestesia.html'">Volver al Ceder Anestesias</button>
+            </div>
+        </form>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>

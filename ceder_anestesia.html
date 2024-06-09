@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceder Anestesias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .button {
+            display: block;
+            width: 60%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .anestesia {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            position: relative;
+        }
+        .anestesia:last-child {
+            border-bottom: none;
+        }
+        .anestesia h3 {
+            margin: 0;
+            color: #007bff;
+        }
+        .anestesia p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .status {
+            font-weight: bold;
+            color: #ff5733;
+        }
+        .status.confirmado {
+            color: #28a745;
+        }
+        .status.esperando {
+            color: #ffc107;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .view-postulants {
+            display: block;
+            width: 60%;
+            margin: 20px auto;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .view-postulants:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ceder Anestesia</h2>
+        <a href="publicar_anestesia.html" class="button">Publicar Nueva Anestesia</a>
+        <a href="anestesias_pendientes_calificacion.html" class="button">Anestesias Cedidas Pendientes de Calificación</a>
+        <a href="anestesias_calificadas.html" class="button">Anestesias Calificadas</a>
+
+        <h3>Anestesias Publicadas por mi</h3>
+
+        <div class="anestesia">
+            <h3>Cirugía General en Hospital 1</h3>
+            <p><strong>Fecha:</strong> 2024-06-10</p>
+            <p><strong>Hora:</strong> 08:00</p>
+            <p><strong>Práctica a realizar:</strong> Apendicectomía</p>
+            <p><strong>Edad del paciente:</strong> 35 años</p>
+            <p><strong>Conocimientos requeridos:</strong> Anestesia Regional</p>
+            <p class="status" style="color:red">Sin postulantes</p>
+        </div>
+
+        <div class="anestesia">
+            <h3>Cirugía Pediátrica en Hospital 2</h3>
+            <p><strong>Fecha:</strong> 2024-06-12</p>
+            <p><strong>Hora:</strong> 10:00</p>
+            <p><strong>Práctica a realizar:</strong> Herniorrafia</p>
+            <p><strong>Edad del paciente:</strong> 3 años</p>
+            <p><strong>Conocimientos requeridos:</strong> Pediatría</p>
+            <p class="status esperando">Con postulantes esperando confirmación</p>
+            <a href="ver_postulantes.html" class="view-postulants">Ver Postulantes</a>
+        </div>
+
+        <div class="anestesia">
+            <h3>Cirugía Cardíaca en Hospital 3</h3>
+            <p><strong>Fecha:</strong> 2024-06-15</p>
+            <p><strong>Hora:</strong> 14:00</p>
+            <p><strong>Práctica a realizar:</strong> Bypass coronario</p>
+            <p><strong>Edad del paciente:</strong> 60 años</p>
+            <p><strong>Conocimientos requeridos:</strong> Cirugía Cardíaca</p>
+            <p class="status confirmado">Con postulante confirmado (cedida)</p>
+            <div class="postulant-info">
+                <p><strong>Nombre del Postulante:</strong> Dr. Juan Pérez</p>
+                <p><strong>Contacto:</strong> juan.perez@example.com</p>
+                <p><strong>Teléfono:</strong> +123456789</p>
+            </div>
+        </div>
+
+        <a href="dashboard.html" class="back-button">Volver al Menú Principal</a>
+    </div>
+</body>
+</html>

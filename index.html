@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: block;
+            width: 60%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .hamburger-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .hamburger-menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f4f4f4;
+        }
+        .informe {
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("dropdownMenu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="dropdownMenu" class="dropdown-menu">
+            <a href="mi_perfil.html">Mi perfil</a>
+        </div>
+        <h1>Dashboard</h1>
+        <a href="ceder_anestesia.html" class="button">Ceder Anestesias</a>
+        <a href="captar_anestesia.html" class="button">Captar Anestesias</a>
+        <a href="mis_compromisos.html" class="button">Mis compromisos</a>
+
+        <div class="informe">
+            <h3>Informe de Anestesias</h3>
+            <p><strong>Anestesias Cedidas:</strong> 5</p>
+            <p><strong>Anestesias Captadas:</strong> 3</p>
+            <p><strong>Calificación Actual:</strong> ★★★★☆</p>
+        </div>
+    </div>
+</body>
+</html>

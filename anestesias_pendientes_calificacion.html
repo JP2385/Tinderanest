@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anestesias Cedidas Pendientes de Calificación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .anestesia {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            position: relative;
+        }
+        .anestesia:last-child {
+            border-bottom: none;
+        }
+        .anestesia h3 {
+            margin: 0;
+            color: #007bff;
+        }
+        .anestesia p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        .rating {
+            margin: 10px 0;
+        }
+        .rating input[type="radio"] {
+            margin-right: 10px;
+        }
+        .calificar-button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calificar-button.calificado {
+            background-color: #28a745;
+        }
+        .calificar-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        function calificar(button, radioGroup, anestesiaId) {
+            const opciones = document.getElementsByName(radioGroup);
+            let calificado = false;
+            for (const opcion of opciones) {
+                if (opcion.checked) {
+                    calificado = true;
+                    break;
+                }
+            }
+            if (calificado) {
+                document.getElementById(anestesiaId).style.display = 'none';
+            } else {
+                alert('Por favor, selecciona una opción para calificar.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Anestesias Cedidas Pendientes de Calificación</h2>
+
+        <div class="anestesia" id="anestesia1">
+            <h3>Cirugía General en Hospital 1</h3>
+            <p><strong>Fecha:</strong> 2024-06-10</p>
+            <p><strong>Hora:</strong> 08:00</p>
+            <p><strong>Práctica realizada:</strong> Apendicectomía</p>
+            <p><strong>Paciente:</strong> 35 años</p>
+            <p><strong>Anestesiólogo:</strong> Dr. Juan Pérez</p>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="calificacion1" value="sin_inconvenientes"> Sin inconvenientes
+                </label>
+                <label>
+                    <input type="radio" name="calificacion1" value="con_inconvenientes"> Con inconvenientes
+                </label>
+            </div>
+            <button class="calificar-button" onclick="calificar(this, 'calificacion1', 'anestesia1')">Calificar</button>
+        </div>
+
+        <div class="anestesia" id="anestesia2">
+            <h3>Cirugía Pediátrica en Hospital 2</h3>
+            <p><strong>Fecha:</strong> 2024-06-12</p>
+            <p><strong>Hora:</strong> 10:00</p>
+            <p><strong>Práctica realizada:</strong> Herniorrafia</p>
+            <p><strong>Paciente:</strong> 3 años</p>
+            <p><strong>Anestesiólogo:</strong> Dr. María López</p>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="calificacion2" value="sin_inconvenientes"> Sin inconvenientes
+                </label>
+                <label>
+                    <input type="radio" name="calificacion2" value="con_inconvenientes"> Con inconvenientes
+                </label>
+            </div>
+            <button class="calificar-button" onclick="calificar(this, 'calificacion2', 'anestesia2')">Calificar</button>
+        </div>
+
+        <a href="ceder_anestesia.html" class="back-button">Volver a Ceder Anestesia</a>
+    </div>
+</body>
+</html>
