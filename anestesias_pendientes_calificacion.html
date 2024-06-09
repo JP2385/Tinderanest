@@ -75,6 +75,11 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+        .no-pendientes {
+            text-align: center;
+            color: #555;
+            margin-top: 20px;
+        }
     </style>
     <script>
         function calificar(button, radioGroup, anestesiaId) {
@@ -88,8 +93,23 @@
             }
             if (calificado) {
                 document.getElementById(anestesiaId).style.display = 'none';
+                checkPending();
             } else {
                 alert('Por favor, selecciona una opción para calificar.');
+            }
+        }
+
+        function checkPending() {
+            const anestesias = document.querySelectorAll('.anestesia');
+            let pending = false;
+            for (const anestesia of anestesias) {
+                if (anestesia.style.display !== 'none') {
+                    pending = true;
+                    break;
+                }
+            }
+            if (!pending) {
+                document.getElementById('noPendientes').style.display = 'block';
             }
         }
     </script>
@@ -133,6 +153,26 @@
             </div>
             <button class="calificar-button" onclick="calificar(this, 'calificacion2', 'anestesia2')">Calificar</button>
         </div>
+
+        <div class="anestesia" id="anestesia3">
+            <h3>Cirugía Cardíaca en Hospital 3</h3>
+            <p><strong>Fecha:</strong> 2024-06-15</p>
+            <p><strong>Hora:</strong> 14:00</p>
+            <p><strong>Práctica realizada:</strong> Bypass coronario</p>
+            <p><strong>Paciente:</strong> 60 años</p>
+            <p><strong>Anestesiólogo:</strong> Dr. Carlos Sánchez</p>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="calificacion3" value="sin_inconvenientes"> Sin inconvenientes
+                </label>
+                <label>
+                    <input type="radio" name="calificacion3" value="con_inconvenientes"> Con inconvenientes
+                </label>
+            </div>
+            <button class="calificar-button" onclick="calificar(this, 'calificacion3', 'anestesia3')">Calificar</button>
+        </div>
+
+        <p id="noPendientes" class="no-pendientes" style="display: none;">No tiene anestesias pendientes de calificación</p>
 
         <a href="ceder_anestesia.html" class="back-button">Volver a Ceder Anestesia</a>
     </div>
