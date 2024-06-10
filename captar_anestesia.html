@@ -36,6 +36,7 @@
         .anestesia {
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
+            position: relative;
         }
         .anestesia:last-child {
             border-bottom: none;
@@ -47,6 +48,21 @@
         .anestesia p {
             margin: 5px 0;
             color: #555;
+        }
+        .postularse-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .postularse-button.esperando {
+            background-color: #ff8c00;
         }
         .back-button {
             display: block;
@@ -101,6 +117,12 @@
                 anestesia.style.display = mostrar ? 'block' : 'none';
             });
         }
+
+        function postularse(button) {
+            button.textContent = 'A la espera de confirmación';
+            button.classList.add('esperando');
+            button.disabled = true;
+        }
     </script>
 </head>
 <body>
@@ -146,6 +168,7 @@
             <p><strong>Edad del paciente:</strong> 5 años</p>
             <p><strong>Conocimientos requeridos:</strong> Pediatría</p>
             <p><strong>Zona:</strong> Capital Federal</p>
+            <button class="postularse-button" onclick="postularse(this)">Postularse</button>
         </div>
 
         <div class="anestesia" data-conocimientos="Cirugía Cardíaca" data-fecha="2024-06-12" data-hora="14:00" data-zona="Zona Norte Pcia Bs As">
@@ -156,6 +179,7 @@
             <p><strong>Edad del paciente:</strong> 60 años</p>
             <p><strong>Conocimientos requeridos:</strong> Cirugía Cardíaca</p>
             <p><strong>Zona:</strong> Zona Norte Pcia Bs As</p>
+            <button class="postularse-button" onclick="postularse(this)">Postularse</button>
         </div>
 
         <div class="anestesia" data-conocimientos="Anestesia Regional" data-fecha="2024-06-15" data-hora="20:00" data-zona="Zona Sur Pcia Bs As">
@@ -166,9 +190,10 @@
             <p><strong>Edad del paciente:</strong> 45 años</p>
             <p><strong>Conocimientos requeridos:</strong> Anestesia Regional</p>
             <p><strong>Zona:</strong> Zona Sur Pcia Bs As</p>
+            <button class="postularse-button" onclick="postularse(this)">Postularse</button>
         </div>
 
-        <a href="index.html" class="back-button">Volver al Menú Principal</a>
+        <a href="index.html" class="back-button">Volver al Dashboard</a>
     </div>
 </body>
 </html>
