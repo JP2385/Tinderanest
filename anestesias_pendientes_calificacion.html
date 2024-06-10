@@ -124,6 +124,7 @@
             if (calificado) {
                 document.getElementById(anestesiaId).style.display = 'none';
                 checkPending();
+                alert('La anestesia fue calificada.');
             } else {
                 alert('Por favor, selecciona una opción para calificar.');
             }
@@ -155,6 +156,7 @@
             <p><strong>Práctica realizada:</strong> Apendicectomía</p>
             <p><strong>Paciente:</strong> 35 años</p>
             <p><strong>Anestesiólogo:</strong> Dr. Juan Pérez</p>
+            <p><strong>Zona:</strong> Capital Federal</p>
             <div class="rating">
                 <label>
                     <input type="radio" name="calificacion1" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion1', 'issues1')"> Sin inconvenientes
@@ -193,6 +195,7 @@
             <p><strong>Práctica realizada:</strong> Herniorrafia</p>
             <p><strong>Paciente:</strong> 3 años</p>
             <p><strong>Anestesiólogo:</strong> Dr. María López</p>
+            <p><strong>Zona:</strong> Zona Norte Pcia Bs As</p>
             <div class="rating">
                 <label>
                     <input type="radio" name="calificacion2" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion2', 'issues2')"> Sin inconvenientes
@@ -231,6 +234,7 @@
             <p><strong>Práctica realizada:</strong> Bypass coronario</p>
             <p><strong>Paciente:</strong> 60 años</p>
             <p><strong>Anestesiólogo:</strong> Dr. Carlos Sánchez</p>
+            <p><strong>Zona:</strong> Zona Sur Pcia Bs As</p>
             <div class="rating">
                 <label>
                     <input type="radio" name="calificacion3" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion3', 'issues3')"> Sin inconvenientes
