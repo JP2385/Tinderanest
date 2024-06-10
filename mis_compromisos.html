@@ -38,6 +38,27 @@
             margin: 5px 0;
             color: #555;
         }
+        .zone {
+            font-weight: bold;
+        }
+        .countdown {
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .countdown.red {
+            color: white;
+            background-color: #d9534f;
+        }
+        .countdown.yellow {
+            color: #333;
+            background-color: #f0ad4e;
+        }
+        .countdown.green {
+            color: white;
+            background-color: #5cb85c;
+        }
         .back-button {
             display: block;
             margin: 20px auto;
@@ -53,39 +74,83 @@
             background-color: #0056b3;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const anestesias = document.querySelectorAll('.anestesia');
+            anestesias.forEach(anestesia => {
+                const countdownElem = anestesia.querySelector('.countdown');
+                const fechaHora = anestesia.getAttribute('data-fecha-hora');
+                updateCountdown(countdownElem, fechaHora);
+                setInterval(() => {
+                    updateCountdown(countdownElem, fechaHora);
+                }, 1000);
+            });
+        });
+
+        function updateCountdown(element, fechaHora) {
+            const eventDate = new Date(fechaHora);
+            const now = new Date();
+            const diff = eventDate - now;
+
+            if (diff <= 0) {
+                element.textContent = "¡Es el momento!";
+                element.className = 'countdown red';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            element.textContent = `Faltan ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (days < 1) {
+                element.className = 'countdown red';
+            } else if (days >= 1 && days <= 3) {
+                element.className = 'countdown yellow';
+            } else {
+                element.className = 'countdown green';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h2>Mis compromisos</h2>
 
-        <div class="anestesia">
+        <div class="anestesia" data-fecha-hora="2024-06-10T08:00:00">
             <h3>Cirugía General en Hospital 1</h3>
             <p><strong>Fecha:</strong> 2024-06-10</p>
             <p><strong>Hora:</strong> 08:00</p>
             <p><strong>Práctica a realizar:</strong> Apendicectomía</p>
             <p><strong>Edad del paciente:</strong> 35 años</p>
-            <p><strong>Conocimientos requeridos:</strong> Anestesia Regional</p>
+            <p class="zone"><strong>Zona:</strong> Capital Federal</p>
+            <p class="countdown"></p>
         </div>
 
-        <div class="anestesia">
+        <div class="anestesia" data-fecha-hora="2024-06-12T10:00:00">
             <h3>Cirugía Pediátrica en Hospital 2</h3>
             <p><strong>Fecha:</strong> 2024-06-12</p>
             <p><strong>Hora:</strong> 10:00</p>
             <p><strong>Práctica a realizar:</strong> Herniorrafia</p>
             <p><strong>Edad del paciente:</strong> 3 años</p>
-            <p><strong>Conocimientos requeridos:</strong> Pediatría</p>
+            <p class="zone"><strong>Zona:</strong> Zona Norte Pcia Bs As</p>
+            <p class="countdown"></p>
         </div>
 
-        <div class="anestesia">
+        <div class="anestesia" data-fecha-hora="2024-06-15T14:00:00">
             <h3>Cirugía Cardíaca en Hospital 3</h3>
             <p><strong>Fecha:</strong> 2024-06-15</p>
             <p><strong>Hora:</strong> 14:00</p>
             <p><strong>Práctica a realizar:</strong> Bypass coronario</p>
             <p><strong>Edad del paciente:</strong> 60 años</p>
-            <p><strong>Conocimientos requeridos:</strong> Cirugía Cardíaca</p>
+            <p class="zone"><strong>Zona:</strong> Zona Sur Pcia Bs As</p>
+            <p class="countdown"></p>
         </div>
 
-        <a href="index.html" class="back-button">Volver al Menú principal</a>
+        <a href="index.html" class="back-button">Volver al Dashboard</a>
     </div>
 </body>
 </html>
+
