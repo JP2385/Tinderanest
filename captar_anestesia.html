@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anestesias Publicadas</title>
+    <title>Captar Anestesias</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,6 +23,16 @@
             text-align: center;
             color: #333;
         }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .filter-section label {
+            margin-right: 10px;
+            color: #555;
+        }
+        .filter-section input, .filter-section select {
+            margin-right: 20px;
+        }
         .anestesia {
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
@@ -37,23 +47,6 @@
         .anestesia p {
             margin: 5px 0;
             color: #555;
-        }
-        .anestesia button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-        .anestesia button:hover {
-            background-color: #218838;
-        }
-        .anestesia button.waiting {
-            background-color: orange;
-            cursor: default;
         }
         .back-button {
             display: block;
@@ -70,50 +63,112 @@
             background-color: #0056b3;
         }
     </style>
+    <script>
+        function filterAnestesias() {
+            const conocimiento = document.getElementById('filtroConocimientos').value.toLowerCase();
+            const fecha = document.getElementById('filtroFecha').value;
+            const franjaHoraria = document.getElementById('filtroFranjaHoraria').value;
+            const zona = document.getElementById('filtroZona').value.toLowerCase();
+            const anestesias = document.querySelectorAll('.anestesia');
+
+            anestesias.forEach(anestesia => {
+                const conocimientos = anestesia.getAttribute('data-conocimientos').toLowerCase();
+                const anestesiaFecha = anestesia.getAttribute('data-fecha');
+                const anestesiaHora = anestesia.getAttribute('data-hora');
+                const anestesiaZona = anestesia.getAttribute('data-zona').toLowerCase();
+                let mostrar = true;
+
+                if (conocimiento && !conocimientos.includes(conocimiento)) {
+                    mostrar = false;
+                }
+                if (fecha && fecha !== anestesiaFecha) {
+                    mostrar = false;
+                }
+                if (franjaHoraria) {
+                    const hora = parseInt(anestesiaHora.split(':')[0]);
+                    if (franjaHoraria === 'mañana' && (hora < 6 || hora >= 12)) {
+                        mostrar = false;
+                    } else if (franjaHoraria === 'tarde' && (hora < 12 || hora >= 18)) {
+                        mostrar = false;
+                    } else if (franjaHoraria === 'noche' && (hora < 18 || hora >= 24)) {
+                        mostrar = false;
+                    }
+                }
+                if (zona && zona !== anestesiaZona) {
+                    mostrar = false;
+                }
+
+                anestesia.style.display = mostrar ? 'block' : 'none';
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h2>Anestesias Publicadas</h2>
+        <h2>Captar Anestesias</h2>
 
-        <div class="anestesia">
-            <h3>Cirugía General en Hospital 1</h3>
+        <div class="filter-section">
+            <label for="filtroConocimientos">Conocimientos específicos:</label>
+            <select id="filtroConocimientos" onchange="filterAnestesias()">
+                <option value="">Todos</option>
+                <option value="Pediatría">Pediatría</option>
+                <option value="Anestesia Regional">Anestesia Regional</option>
+                <option value="Cirugía Cardíaca">Cirugía Cardíaca</option>
+                <option value="Transplante">Transplante</option>
+            </select>
+
+            <label for="filtroFecha">Fecha:</label>
+            <input type="date" id="filtroFecha" onchange="filterAnestesias()">
+
+            <label for="filtroFranjaHoraria">Franja horaria:</label>
+            <select id="filtroFranjaHoraria" onchange="filterAnestesias()">
+                <option value="">Todas</option>
+                <option value="mañana">Mañana (06:00-12:00)</option>
+                <option value="tarde">Tarde (12:00-18:00)</option>
+                <option value="noche">Noche (18:00-24:00)</option>
+            </select>
+
+            <label for="filtroZona">Zona:</label>
+            <select id="filtroZona" onchange="filterAnestesias()">
+                <option value="">Todas</option>
+                <option value="Capital Federal">Capital Federal</option>
+                <option value="Zona Norte Pcia Bs As">Zona Norte Pcia Bs As</option>
+                <option value="Zona Sur Pcia Bs As">Zona Sur Pcia Bs As</option>
+                <option value="Zona Oeste Pcia Bs As">Zona Oeste Pcia Bs As</option>
+            </select>
+        </div>
+
+        <div class="anestesia" data-conocimientos="Pediatría" data-fecha="2024-06-10" data-hora="08:00" data-zona="Capital Federal">
+            <h3>Cirugía Pediátrica en Hospital 1</h3>
             <p><strong>Fecha:</strong> 2024-06-10</p>
             <p><strong>Hora:</strong> 08:00</p>
             <p><strong>Práctica a realizar:</strong> Apendicectomía</p>
-            <p><strong>Edad del paciente:</strong> 35 años</p>
-            <p><strong>Conocimientos requeridos:</strong> Anestesia Regional</p>
-            <button onclick="postularse(this)">Postularse</button>
-        </div>
-
-        <div class="anestesia">
-            <h3>Cirugía Pediátrica en Hospital 2</h3>
-            <p><strong>Fecha:</strong> 2024-06-12</p>
-            <p><strong>Hora:</strong> 10:00</p>
-            <p><strong>Práctica a realizar:</strong> Herniorrafia</p>
-            <p><strong>Edad del paciente:</strong> 3 años</p>
+            <p><strong>Edad del paciente:</strong> 5 años</p>
             <p><strong>Conocimientos requeridos:</strong> Pediatría</p>
-            <button onclick="postularse(this)">Postularse</button>
+            <p><strong>Zona:</strong> Capital Federal</p>
         </div>
 
-        <div class="anestesia">
-            <h3>Cirugía Cardíaca en Hospital 3</h3>
-            <p><strong>Fecha:</strong> 2024-06-15</p>
+        <div class="anestesia" data-conocimientos="Cirugía Cardíaca" data-fecha="2024-06-12" data-hora="14:00" data-zona="Zona Norte Pcia Bs As">
+            <h3>Cirugía Cardíaca en Hospital 2</h3>
+            <p><strong>Fecha:</strong> 2024-06-12</p>
             <p><strong>Hora:</strong> 14:00</p>
             <p><strong>Práctica a realizar:</strong> Bypass coronario</p>
             <p><strong>Edad del paciente:</strong> 60 años</p>
             <p><strong>Conocimientos requeridos:</strong> Cirugía Cardíaca</p>
-            <button onclick="postularse(this)">Postularse</button>
+            <p><strong>Zona:</strong> Zona Norte Pcia Bs As</p>
+        </div>
+
+        <div class="anestesia" data-conocimientos="Anestesia Regional" data-fecha="2024-06-15" data-hora="20:00" data-zona="Zona Sur Pcia Bs As">
+            <h3>Cirugía General en Hospital 3</h3>
+            <p><strong>Fecha:</strong> 2024-06-15</p>
+            <p><strong>Hora:</strong> 20:00</p>
+            <p><strong>Práctica a realizar:</strong> Colecistectomía</p>
+            <p><strong>Edad del paciente:</strong> 45 años</p>
+            <p><strong>Conocimientos requeridos:</strong> Anestesia Regional</p>
+            <p><strong>Zona:</strong> Zona Sur Pcia Bs As</p>
         </div>
 
         <a href="index.html" class="back-button">Volver al Menú Principal</a>
     </div>
-    <script>
-        function postularse(button) {
-            button.innerText = 'A la espera de confirmación';
-            button.classList.add('waiting');
-            button.disabled = true;
-            // Aquí puedes agregar la lógica para manejar la postulación, como enviar la solicitud al servidor
-        }
-    </script>
 </body>
 </html>
