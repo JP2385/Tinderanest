@@ -59,6 +59,17 @@
         .rating input[type="radio"] {
             margin-right: 10px;
         }
+        .issues {
+            display: none;
+            margin-top: 10px;
+        }
+        .issues input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .textarea-container {
+            display: none;
+            margin-top: 10px;
+        }
         .calificar-button {
             padding: 10px 15px;
             background-color: #007bff;
@@ -67,6 +78,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-top: 10px;
         }
         .calificar-button.calificado {
             background-color: #28a745;
@@ -82,6 +94,24 @@
         }
     </style>
     <script>
+        function mostrarOpciones(radioGroup, issuesId) {
+            const opciones = document.getElementsByName(radioGroup);
+            const issuesDiv = document.getElementById(issuesId);
+            let mostrar = false;
+            for (const opcion of opciones) {
+                if (opcion.checked && opcion.value === 'con_inconvenientes') {
+                    mostrar = true;
+                    break;
+                }
+            }
+            issuesDiv.style.display = mostrar ? 'block' : 'none';
+        }
+
+        function mostrarTextarea(checkbox, textareaId) {
+            const textareaDiv = document.getElementById(textareaId);
+            textareaDiv.style.display = checkbox.checked ? 'block' : 'none';
+        }
+
         function calificar(button, radioGroup, anestesiaId) {
             const opciones = document.getElementsByName(radioGroup);
             let calificado = false;
@@ -127,11 +157,31 @@
             <p><strong>Anestesiólogo:</strong> Dr. Juan Pérez</p>
             <div class="rating">
                 <label>
-                    <input type="radio" name="calificacion1" value="sin_inconvenientes"> Sin inconvenientes
+                    <input type="radio" name="calificacion1" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion1', 'issues1')"> Sin inconvenientes
                 </label>
                 <label>
-                    <input type="radio" name="calificacion1" value="con_inconvenientes"> Con inconvenientes
+                    <input type="radio" name="calificacion1" value="con_inconvenientes" onclick="mostrarOpciones('calificacion1', 'issues1')"> Con inconvenientes
                 </label>
+            </div>
+            <div class="issues" id="issues1">
+                <label>
+                    <input type="checkbox" value="no_asistio"> No asistió
+                </label>
+                <label>
+                    <input type="checkbox" value="llego_tarde"> Llegó tarde
+                </label>
+                <label>
+                    <input type="checkbox" value="queja_trato"> El cirujano se quejó del trato
+                </label>
+                <label>
+                    <input type="checkbox" value="no_conocimientos"> No demostró los conocimientos específicos que acreditó
+                </label>
+                <label>
+                    <input type="checkbox" value="otros" onclick="mostrarTextarea(this, 'textarea1')"> Otros
+                </label>
+                <div class="textarea-container" id="textarea1">
+                    <textarea rows="4" cols="50" placeholder="Detalles adicionales"></textarea>
+                </div>
             </div>
             <button class="calificar-button" onclick="calificar(this, 'calificacion1', 'anestesia1')">Calificar</button>
         </div>
@@ -145,11 +195,31 @@
             <p><strong>Anestesiólogo:</strong> Dr. María López</p>
             <div class="rating">
                 <label>
-                    <input type="radio" name="calificacion2" value="sin_inconvenientes"> Sin inconvenientes
+                    <input type="radio" name="calificacion2" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion2', 'issues2')"> Sin inconvenientes
                 </label>
                 <label>
-                    <input type="radio" name="calificacion2" value="con_inconvenientes"> Con inconvenientes
+                    <input type="radio" name="calificacion2" value="con_inconvenientes" onclick="mostrarOpciones('calificacion2', 'issues2')"> Con inconvenientes
                 </label>
+            </div>
+            <div class="issues" id="issues2">
+                <label>
+                    <input type="checkbox" value="no_asistio"> No asistió
+                </label>
+                <label>
+                    <input type="checkbox" value="llego_tarde"> Llegó tarde
+                </label>
+                <label>
+                    <input type="checkbox" value="queja_trato"> El cirujano se quejó del trato
+                </label>
+                <label>
+                    <input type="checkbox" value="no_conocimientos"> No demostró los conocimientos específicos que acreditó
+                </label>
+                <label>
+                    <input type="checkbox" value="otros" onclick="mostrarTextarea(this, 'textarea2')"> Otros
+                </label>
+                <div class="textarea-container" id="textarea2">
+                    <textarea rows="4" cols="50" placeholder="Detalles adicionales"></textarea>
+                </div>
             </div>
             <button class="calificar-button" onclick="calificar(this, 'calificacion2', 'anestesia2')">Calificar</button>
         </div>
@@ -163,11 +233,31 @@
             <p><strong>Anestesiólogo:</strong> Dr. Carlos Sánchez</p>
             <div class="rating">
                 <label>
-                    <input type="radio" name="calificacion3" value="sin_inconvenientes"> Sin inconvenientes
+                    <input type="radio" name="calificacion3" value="sin_inconvenientes" onclick="mostrarOpciones('calificacion3', 'issues3')"> Sin inconvenientes
                 </label>
                 <label>
-                    <input type="radio" name="calificacion3" value="con_inconvenientes"> Con inconvenientes
+                    <input type="radio" name="calificacion3" value="con_inconvenientes" onclick="mostrarOpciones('calificacion3', 'issues3')"> Con inconvenientes
                 </label>
+            </div>
+            <div class="issues" id="issues3">
+                <label>
+                    <input type="checkbox" value="no_asistio"> No asistió
+                </label>
+                <label>
+                    <input type="checkbox" value="llego_tarde"> Llegó tarde
+                </label>
+                <label>
+                    <input type="checkbox" value="queja_trato"> El cirujano se quejó del trato
+                </label>
+                <label>
+                    <input type="checkbox" value="no_conocimientos"> No demostró los conocimientos específicos que acreditó
+                </label>
+                <label>
+                    <input type="checkbox" value="otros" onclick="mostrarTextarea(this, 'textarea3')"> Otros
+                </label>
+                <div class="textarea-container" id="textarea3">
+                    <textarea rows="4" cols="50" placeholder="Detalles adicionales"></textarea>
+                </div>
             </div>
             <button class="calificar-button" onclick="calificar(this, 'calificacion3', 'anestesia3')">Calificar</button>
         </div>
