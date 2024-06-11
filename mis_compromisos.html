@@ -76,6 +76,21 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 2);
+            const fourDaysLater = new Date(today);
+            fourDaysLater.setDate(today.getDate() + 4);
+
+            document.getElementById('anestesia1-fecha').textContent = formatDate(today);
+            document.getElementById('anestesia1').setAttribute('data-fecha-hora', `${formatDate(today)}T08:00:00`);
+
+            document.getElementById('anestesia2-fecha').textContent = formatDate(tomorrow);
+            document.getElementById('anestesia2').setAttribute('data-fecha-hora', `${formatDate(tomorrow)}T10:00:00`);
+
+            document.getElementById('anestesia3-fecha').textContent = formatDate(fourDaysLater);
+            document.getElementById('anestesia3').setAttribute('data-fecha-hora', `${formatDate(fourDaysLater)}T14:00:00`);
+
             const anestesias = document.querySelectorAll('.anestesia');
             anestesias.forEach(anestesia => {
                 const countdownElem = anestesia.querySelector('.countdown');
@@ -113,15 +128,22 @@
                 element.className = 'countdown green';
             }
         }
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
     </script>
 </head>
 <body>
     <div class="container">
         <h2>Mis compromisos</h2>
 
-        <div class="anestesia" data-fecha-hora="2024-06-10T08:00:00">
+        <div class="anestesia" id="anestesia1">
             <h3>Cirugía General en Hospital 1</h3>
-            <p><strong>Fecha:</strong> 2024-06-10</p>
+            <p><strong>Fecha:</strong> <span id="anestesia1-fecha"></span></p>
             <p><strong>Hora:</strong> 08:00</p>
             <p><strong>Práctica a realizar:</strong> Apendicectomía</p>
             <p><strong>Edad del paciente:</strong> 35 años</p>
@@ -129,9 +151,9 @@
             <p class="countdown"></p>
         </div>
 
-        <div class="anestesia" data-fecha-hora="2024-06-12T10:00:00">
+        <div class="anestesia" id="anestesia2">
             <h3>Cirugía Pediátrica en Hospital 2</h3>
-            <p><strong>Fecha:</strong> 2024-06-12</p>
+            <p><strong>Fecha:</strong> <span id="anestesia2-fecha"></span></p>
             <p><strong>Hora:</strong> 10:00</p>
             <p><strong>Práctica a realizar:</strong> Herniorrafia</p>
             <p><strong>Edad del paciente:</strong> 3 años</p>
@@ -139,9 +161,9 @@
             <p class="countdown"></p>
         </div>
 
-        <div class="anestesia" data-fecha-hora="2024-06-15T14:00:00">
+        <div class="anestesia" id="anestesia3">
             <h3>Cirugía Cardíaca en Hospital 3</h3>
-            <p><strong>Fecha:</strong> 2024-06-15</p>
+            <p><strong>Fecha:</strong> <span id="anestesia3-fecha"></span></p>
             <p><strong>Hora:</strong> 14:00</p>
             <p><strong>Práctica a realizar:</strong> Bypass coronario</p>
             <p><strong>Edad del paciente:</strong> 60 años</p>
